@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}Chapters{% endblock %}
+
+{% block content %}
+<div class="list-group">
+    {% for chapter in chapters %}
+        <a href="{{ url_for('chapter', file_name=chapter.file) }}" class="list-group-item list-group-item-action">
+            {{ chapter.title }}
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}
