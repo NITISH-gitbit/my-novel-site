@@ -4,46 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: auto;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        .chapter-content {
+            max-width: 900px;
+            margin: 20px auto;
             padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        p {
+        .chapter-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            text-align: justify;
             margin-bottom: 20px;
-            text-indent: 40px;
         }
-        nav {
+        .navigation {
             display: flex;
             justify-content: space-between;
-            margin: 20px 0;
+            margin-top: 20px;
+        }
+        .navigation a {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .navigation a:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #333;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <h1>{{ title }}</h1>
-    <article>
+    <header>
+        <h1>{{ title }}</h1>
+    </header>
+
+    <div class="chapter-content">
         {% for paragraph in paragraphs %}
-        <p>{{ paragraph }}</p>
+            <p>{{ paragraph }}</p>
         {% endfor %}
-    </article>
-    <nav>
+    </div>
+
+    <div class="navigation">
         {% if previous_chapter %}
-        <a href="/chapter/{{ previous_chapter.file }}">Previous Chapter</a>
+            <a href="/chapter/{{ previous_chapter.file }}">Previous Chapter</a>
         {% else %}
-        <span>Previous Chapter</span>
+            <span>Previous Chapter</span>
         {% endif %}
-
-        <a href="/">Chapter List</a>
-
+        
+        <a href="/">Back to Chapter List</a>
+        
         {% if next_chapter %}
-        <a href="/chapter/{{ next_chapter.file }}">Next Chapter</a>
+            <a href="/chapter/{{ next_chapter.file }}">Next Chapter</a>
         {% else %}
-        <span>Next Chapter</span>
+            <span>Next Chapter</span>
         {% endif %}
-    </nav>
+    </div>
+
+    <footer>
+        <p>Powered by Flask | Chapter Viewer</p>
+    </footer>
 </body>
 </html>
