@@ -1,14 +1,49 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        p {
+            margin-bottom: 20px;
+            text-indent: 40px;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <article>
+        {% for paragraph in paragraphs %}
+        <p>{{ paragraph }}</p>
+        {% endfor %}
+    </article>
+    <nav>
+        {% if previous_chapter %}
+        <a href="/chapter/{{ previous_chapter.file }}">Previous Chapter</a>
+        {% else %}
+        <span>Previous Chapter</span>
+        {% endif %}
 
-{% block title %}{{ title }}{% endblock %}
+        <a href="/">Chapter List</a>
 
-{% block content %}
-<div class="card">
-    <div class="card-body">
-        <h2>{{ title }}</h2>
-        <hr>
-        <pre style="white-space: pre-wrap;">{{ content }}</pre>
-    </div>
-</div>
-<a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Back to Chapters</a>
-{% endblock %}
+        {% if next_chapter %}
+        <a href="/chapter/{{ next_chapter.file }}">Next Chapter</a>
+        {% else %}
+        <span>Next Chapter</span>
+        {% endif %}
+    </nav>
+</body>
+</html>
